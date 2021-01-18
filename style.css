@@ -113,6 +113,10 @@ input{
 .nominate:hover {
   background-color: #595959;
 }
+.nominate:disabled {
+  background: #dddddd;
+  cursor:default;
+}
 #rate{
   display: none;
 }
