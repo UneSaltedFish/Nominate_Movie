@@ -17,6 +17,7 @@ function magnify(){
     //clear gallery
     $("#gallery").hide();
     $("#rate").show();
+
     //change to searched movie
             /*$("#rate").html("Result of \""+inputT+"\"");*/
 
@@ -33,13 +34,15 @@ function magnify(){
         alert("movie not found");
       }
       else{
+        //an array of current search Result
+        var idlist=[];
         //refresh everytime after search
         $("#rate").empty();
         $.each(jmovieloads.Search,function(i,object){
                 // alert(jmovieloads.Search[i].Poster);
           //specific movie moviedata
           var id = jmovieloads.Search[i].imdbID;
-                // console.log(id);
+          idlist.push(id);
           //append movie class to rate
           $("<div>",{id:i,"class":"movie"}).appendTo("#rate");
           //source of poster
@@ -55,25 +58,32 @@ function magnify(){
           $("<div>",{"class":"overlay"}).appendTo("#"+i);
           $("<div>",{"class":"text"}).appendTo(".overlay");
           $(".text").html();
+
           //title
           $("<div>",{id:"i"+i,"class":"title"}).appendTo("#"+i);
           $("#i"+i).html(jmovieloads.Search[i].Title + '<br>'+ "year: "+jmovieloads.Search[i].Year);
-          //button
+          //nominate button
           $("<button>",{id:"nominate"+i,"class":"nominate"}).appendTo("#"+i);
           $('#nominate'+i).html(" nominate");
           $('#nominate'+i).prepend('<i class="fa fa-plus-circle"></i>');
+          //if movie is in the movie list
+          if(movielist.indexOf(id) !== -1){
+            console.log("checking any movie has been nominate");
+            //find id in current search array "idlist" get the index
+            var which= idlist.indexOf(id);
+            console.log(which);
+          }
 
           //click nominate, add it in to list
           $('#nominate'+i).click(function(){
                     /*alert(i+"is clicked"+" id is: "+jmovieloads.Search[i].imdbID);*/
             addlist(jmovieloads.Search[i].imdbID);
             $(".listbox").show();
+            //if movie is added in list,button diabled
+            if(movielist.indexOf(id) !== -1){
+            document.getElementById("nominate"+i).disabled = true;
+            }
           });
-
-
-
-
-
 
 
         });
@@ -101,9 +111,16 @@ function addlist(movieid){
     if(movielist.indexOf(movieid) == -1){
       //search specific movie data by id
       $.getJSON('https://omdbapi.com/?apikey=94e5b3c8&i='+movieid,function(jsmoviedata){
-        $("ul").append("<li>"+jsmoviedata.Title+"</li>");
+        $("<li>",{id:"i"+movieid}).appendTo("ul");
+        $("#i"+movieid).html(jsmoviedata.Title);
+        //append a delete button after li
+        $("<button>",{id:movieid,"class":"delete"}).appendTo("ul");
+        $("#"+movieid).prepend('<i class="fa fa-minus-circle"></i>');
+        $("#"+movieid).click(function(){
+          deletefromlist(movieid);
+        });
       });
-      
+
       movielist.push(movieid);
       listnum++;
     }
@@ -117,6 +134,14 @@ function addlist(movieid){
   else{
     alert("you have 5 nominated movie, delete some to add")
   }
+
+}
+
+//delete movie from listbox
+function deletefromlist(movieid){
+  console.log("delete movie id: "+movieid);
+  $("#i"+movieid).remove();
+  $("#"+movieid).remove();
 
 }
 
