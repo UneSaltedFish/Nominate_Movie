@@ -36,6 +36,8 @@ function magnify(){
       else{
         //an array of current search Result
         var idlist=[];
+        //an array of which movie in gallery has been nominated in movielist
+        var isnominated =[];
         //refresh everytime after search
         $("#rate").empty();
         $.each(jmovieloads.Search,function(i,object){
@@ -68,16 +70,18 @@ function magnify(){
           $('#nominate'+i).prepend('<i class="fa fa-plus-circle"></i>');
           //if movie is in the movie list
           if(movielist.indexOf(id) !== -1){
+
             console.log("checking any movie has been nominate");
             //find id in current search array "idlist" get the index
             var which= idlist.indexOf(id);
-            console.log(which);
+            isnominated.push(which);
+
           }
 
           //click nominate, add it in to list
           $('#nominate'+i).click(function(){
                     /*alert(i+"is clicked"+" id is: "+jmovieloads.Search[i].imdbID);*/
-            addlist(jmovieloads.Search[i].imdbID);
+            addlist(jmovieloads.Search[i].imdbID,i);
             $(".listbox").show();
             //if movie is added in list,button diabled
             if(movielist.indexOf(id) !== -1){
@@ -86,6 +90,16 @@ function magnify(){
           });
 
 
+        });
+        $.each(isnominated, function( index, value ) {
+            console.log(isnominated);
+            console.log(idlist);
+            document.getElementById("nominate"+isnominated[0]).disabled = true;
+            isnominated.shift();
+            console.log("poped");
+            console.log(isnominated);
+            console.log(idlist);
+            
         });
       }
 
@@ -105,7 +119,7 @@ function magnify(){
 }
 //addlist function: when click on nominate
 
-function addlist(movieid){
+function addlist(movieid,i){
   if(listnum<5){
     //if movie is not added
     if(movielist.indexOf(movieid) == -1){
@@ -117,12 +131,14 @@ function addlist(movieid){
         $("<button>",{id:movieid,"class":"delete"}).appendTo("ul");
         $("#"+movieid).prepend('<i class="fa fa-minus-circle"></i>');
         $("#"+movieid).click(function(){
-          deletefromlist(movieid);
+          deletefromlist(movieid,i);
         });
       });
 
       movielist.push(movieid);
       listnum++;
+      console.log(listnum);
+      console.log(movielist);
     }
     //if movie is added, don't add
     else{
@@ -138,10 +154,22 @@ function addlist(movieid){
 }
 
 //delete movie from listbox
-function deletefromlist(movieid){
+function deletefromlist(movieid,i){
   console.log("delete movie id: "+movieid);
+  //delete that li and button after it
   $("#i"+movieid).remove();
   $("#"+movieid).remove();
+  //if movie is in the list
+  //delete from movielist
+  if(movielist.indexOf(movieid) !== -1){
+    movielist.splice(movielist.indexOf(movieid), 1);
+  }
+  listnum--;
+  //resume nominate of that movie
+  document.getElementById("nominate"+i).disabled = false;
+
+  console.log(listnum);
+  console.log(movielist);
 
 }
 
