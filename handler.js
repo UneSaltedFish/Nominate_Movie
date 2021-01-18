@@ -6,9 +6,9 @@ let poster = 'https://cdn.pixabay.com/photo/2016/12/14/23/08/page-not-found-1907
 function magnify(){
   inputT= document.getElementById("input").value;
   //movie list that name include input
-  movieloads='http://omdbapi.com/?apikey=94e5b3c8&s='+ inputT;
+  movieloads='https://omdbapi.com/?apikey=94e5b3c8&s='+ inputT;
   //specifc movie data
-  moviedata = 'http://omdbapi.com/?apikey=94e5b3c8&t='+ inputT;
+  moviedata = 'https://omdbapi.com/?apikey=94e5b3c8&t='+ inputT;
 //if input is null, alert
   if(!inputT){
     alert("Input something");
@@ -100,7 +100,7 @@ function addlist(movieid){
     //if movie is not added
     if(movielist.indexOf(movieid) == -1){
       //search specific movie data by id
-      $.getJSON('http://omdbapi.com/?apikey=94e5b3c8&i='+movieid,function(jsmoviedata){
+      $.getJSON('https://omdbapi.com/?apikey=94e5b3c8&i='+movieid,function(jsmoviedata){
         $("ul").append("<li>"+jsmoviedata.Title+"</li>");
       });
       
