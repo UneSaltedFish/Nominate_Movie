@@ -3,6 +3,10 @@ var movielist = [];
 var inputT;
 let moviedata=''//default
 let poster = 'https://cdn.pixabay.com/photo/2016/12/14/23/08/page-not-found-1907792_1280.jpg';//default as not found
+
+
+
+
 function magnify(){
   inputT= document.getElementById("input").value;
   //movie list that name include input
@@ -41,7 +45,7 @@ function magnify(){
         //refresh everytime after search
         $("#rate").empty();
         $.each(jmovieloads.Search,function(i,object){
-                // alert(jmovieloads.Search[i].Poster);
+
           //specific movie moviedata
           var id = jmovieloads.Search[i].imdbID;
           idlist.push(id);
@@ -91,6 +95,8 @@ function magnify(){
 
 
         });
+        //when check current page has/not has movie in the list
+        //if has, disable the nominate button
         $.each(isnominated, function( index, value ) {
             console.log(isnominated);
             console.log(idlist);
@@ -99,23 +105,10 @@ function magnify(){
             console.log("poped");
             console.log(isnominated);
             console.log(idlist);
-            
         });
       }
-
-
     });
-                    //specific movie data
-                /*    $.getJSON(moviedata,function(jmoviedata){
-                      console.log(jmoviedata);
-                      console.log(jmoviedata.Poster)
-                    });*/
-
-
   }
-                      //  console.log(inputT);
-
-                      //document.getElementById("rated").src = poster;
 }
 //addlist function: when click on nominate
 
