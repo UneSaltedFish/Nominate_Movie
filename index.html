@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<title>Nominate your Favorite movie</title>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="Bar">
+  <button class="btn" id="home" onclick="gogallery()"><i class="fa fa-home"></i> Home </button>
+  <div class= SearchBar>
+    <input type="text" placeholder="Find a Movie" onfocus="this.value=''" id="input">
+    <button onclick=magnify() class="btn" id="search"><i class="fa fa-search"></i></button>
+    <button class="btn" id="nominateList" onclick= boxswitch()><i class="fa fa-list-alt"></i></button>
+  </div>
+</div>
+<div class="listbox">
+  <ul>
+
+  </ul>
+</div>
+<div class = "GalleryandRate" id = "GalleryandRate">
+  <!--default will be most rated movies-->
+  <div id="gallery">
+    <div class="movie">
+      <img src="https://m.media-amazon.com/images/M/MV5BOWY0NzVkYWItZWZhYi00MTdkLTkyYzktZTlmNDU3NWZhOWZiXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg" alt="poster" width="250" height="350">
+      <div class="overlay">
+        <div class="text">"Title": "Scooby-Doo",
+"Year": "2002",
+"Rated": "PG",
+"Released": "14 Jun 2002",
+"Runtime": "86 min",
+"Genre": "Adventure, Comedy, Family, Fantasy, Mystery",
+"Director": "Raja Gosnell",
+</div>
+      </div>
+      <div class="title">Scooby doo <br /> year: 2002</div>
+      <button class="nominate"><i class="fa fa-plus-circle"></i> Nominate </button>
+    </div>
+    <div class="movie">
+      <img src="https://m.media-amazon.com/images/M/MV5BOWY0NzVkYWItZWZhYi00MTdkLTkyYzktZTlmNDU3NWZhOWZiXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg" alt="poster" width="250" height="350">
+      <div class="overlay">
+        <div class="text">Hello World</div>
+      </div>
+      <div class="title">Scooby doo <br /> year: 2002</div>
+      <button class="nominate"><i class="fa fa-plus-circle"></i> Nominate </button>
+    </div><div class="movie">
+      <img src="https://m.media-amazon.com/images/M/MV5BOWY0NzVkYWItZWZhYi00MTdkLTkyYzktZTlmNDU3NWZhOWZiXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg" alt="poster" width="250" height="350">
+      <div class="overlay">
+        <div class="text">Hello World</div>
+      </div>
+      <div class="title">Scooby doo <br /> year: 2002</div>
+      <button class="nominate"><i class="fa fa-plus-circle"></i> Nominate </button>
+    </div><div class="movie">
+      <img src="https://m.media-amazon.com/images/M/MV5BOWY0NzVkYWItZWZhYi00MTdkLTkyYzktZTlmNDU3NWZhOWZiXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg" alt="poster" width="250" height="350">
+      <div class="overlay">
+        <div class="text">Hello World</div>
+      </div>
+      <div class="title">Scooby doo <br /> year: 2002</div>
+      <button class="nominate"><i class="fa fa-plus-circle"></i> Nominate </button>
+    </div><div class="movie">
+      <img src="https://m.media-amazon.com/images/M/MV5BOWY0NzVkYWItZWZhYi00MTdkLTkyYzktZTlmNDU3NWZhOWZiXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg" alt="poster" width="250" height="350">
+      <div class="overlay">
+        <div class="text">Hello World</div>
+      </div>
+      <div class="title">Scooby doo <br /> year: 2002</div>
+      <button class="nominate"><i class="fa fa-plus-circle"></i> Nominate </button>
+    </div>
+
+    <!--default: will add some pics and descriptions of newly added movies and a nominate button
+        after search, this div will be delete and change to a search result-->
+
+  </div>
+<!--after search change to rate div-->
+  <div id="rate">
+
+  </div>
+
+</div><!--GalleryandRate finished-->
+<div id="find">Couldn't find what you want? Try more specific search.</div>
+
+
+<script src="handler.js"></script>
+</body>
+</html>

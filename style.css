@@ -1,0 +1,118 @@
+body{
+  background-color: #a3c2c2;
+}
+/*whole bar property*/
+.Bar{
+  background-color: #808080;
+  width: 100%;
+  position:relative;
+  padding: 8px 8px 8px 8px;
+  min-width: 650px;
+}
+/*all button property*/
+.btn {
+  position:relative;
+  background-color: #808080;
+  border: none;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn:hover {
+  background-color: #595959;
+}
+/*On the right of Bar;
+include input and search button*/
+.SearchBar{
+  position:relative;
+  display: inline-block;
+  float:right;
+  background-color: #808080;
+}
+/*input box in SearchBar*/
+input{
+  font-size: 30px;
+  margin: 5px;
+  border: 2px solid #808080;
+  text-align: center;
+  width:70%;
+}
+
+
+/*list box*/
+.listbox{
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 300px;
+  border: 5px solid #808080;
+  background-color: white;
+  z-index: 3;
+  display:none;
+}
+
+.GalleryandRate{
+  width:1040px;
+  margin: auto;
+}
+#gallery{
+  margin-bottom: 10px;
+}
+
+.movie {
+  position: relative;
+  background-color: white;
+  margin: 5px;
+  float: left;
+  width: 250px;
+  height:450px;
+}
+.movie img {
+  height: auto;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 350px;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+.movie:hover .overlay {
+  opacity: 1;
+}
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  padding:30px;
+  text-align: center;
+}
+
+
+.title {
+  padding:5px;
+  float:left;
+  width: 155px;
+
+}
+.nominate{
+  margin-right:2px;
+  background-color: #808080;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding:5px;
+  float:right
+}
+.nominate:hover {
+  background-color: #595959;
+}
+#rate{
+  display: none;
+}
