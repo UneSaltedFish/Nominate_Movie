@@ -1,9 +1,12 @@
 var listnum=0;
 var movielist = [];
 var inputT;
+//an array of current search Result
+var idlist=[];
 let moviedata=''//default
 let poster = 'https://cdn.pixabay.com/photo/2016/12/14/23/08/page-not-found-1907792_1280.jpg';//default as not found
-
+//topten movie's id in gallery,can be changed
+var topten = ['tt9770150'];
 
 
 
@@ -39,8 +42,7 @@ function magnify(){
         alert("movie not found");
       }
       else{
-        //an array of current search Result
-        var idlist=[];
+
         //an array of which movie in gallery has been nominated in movielist
         var isnominated =[];
         //refresh everytime after search
@@ -75,7 +77,7 @@ function magnify(){
           $("#i"+i).html(jmovieloads.Search[i].Title + '<br>'+ "year: "+jmovieloads.Search[i].Year);
           //nominate button
           $("<button>",{id:"nominate"+i,"class":"nominate"}).appendTo("#"+i);
-          $('#nominate'+i).html(" nominate");
+          $('#nominate'+i).html(" Nominate");
           $('#nominate'+i).prepend('<i class="fa fa-plus-circle"></i>');
           //if movie is in the movie list
           if(movielist.indexOf(id) !== -1){
@@ -89,12 +91,15 @@ function magnify(){
 
           //click nominate, add it in to list
           $('#nominate'+i).click(function(){
-                    /*alert(i+"is clicked"+" id is: "+jmovieloads.Search[i].imdbID);*/
             addlist(jmovieloads.Search[i].imdbID,i);
             $(".listbox").show();
-            //if movie is added in list,button diabled
+            //if movie is added in list,button in search diabled
             if(movielist.indexOf(id) !== -1){
             document.getElementById("nominate"+i).disabled = true;
+            //if this movie is also in gallery,disable that as well
+            if(topten.indexOf(id) !== -1){
+              document.getElementById("nominate0"+i).disabled = true;
+            }
             }
           });
 
@@ -159,13 +164,23 @@ function deletefromlist(movieid,i){
   $("#i"+movieid).remove();
   $("#"+movieid).remove();
   //if movie is in the list
+
+  //resume nominate of that movie
+
+  //if movie both in search and gallery
+  if (idlist.indexOf(movieid) !==-1 && topten.indexOf(movieid) !==-1){
+    document.getElementById("nominate0"+i).disabled = false;
+    document.getElementById("nominate"+i).disabled = false;
+  }
+  else{document.getElementById("nominate"+i).disabled = false;}
+
+
+
   //delete from movielist
   if(movielist.indexOf(movieid) !== -1){
     movielist.splice(movielist.indexOf(movieid), 1);
   }
   listnum--;
-  //resume nominate of that movie
-  document.getElementById("nominate"+i).disabled = false;
 
   console.log(listnum);
   console.log(movielist);
@@ -184,6 +199,16 @@ function gogallery(){
   $("#gallery").show();
 }
 
+//when click nominate on gallery movies
+//imdb:movie imdbID,i:index of movie in gallery
+function galleryclick(imdb,i){
+  addlist(imdb,i);
+  $(".listbox").show();
+  //if movie is added in list,button diabled
+  if(movielist.indexOf(imdb) !== -1){
+  document.getElementById('nominate0'+i).disabled = true;
+  }
+}
 
 //click list icon to show/hide box
 function boxswitch(){
