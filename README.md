@@ -17,6 +17,14 @@ Hosting at: https://unesaltedfish.github.io/Nominate_Movie/
 
 √Display a banner when the user has 5 nominations.
 
+√Description of Moive when cursor move on the poster
+
+√Click on upper right corner list button to show/hide the nominate list
+
+√Click on upper left corner home button to go back to Gallery
+
+
+
 
 Using OMDB's API: http://www.omdbapi.com/apikey.aspx
 
