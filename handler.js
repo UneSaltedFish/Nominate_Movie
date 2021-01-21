@@ -7,6 +7,7 @@ let poster = 'https://cdn.pixabay.com/photo/2016/12/14/23/08/page-not-found-1907
 
 
 
+
 function magnify(){
   inputT= document.getElementById("input").value;
   //movie list that name include input
@@ -61,9 +62,13 @@ function magnify(){
           $("<img>",{src:sss,width:"250", height:"350"}).appendTo("#"+i);
 
           //overlay affect on image to show detail
-          $("<div>",{"class":"overlay"}).appendTo("#"+i);
-          $("<div>",{"class":"text"}).appendTo(".overlay");
-          $(".text").html();
+          $("<div>",{id:"o"+i,"class":"overlay"}).appendTo("#"+i);
+          $("<div>",{id:"te"+i,"class":"text"}).appendTo("#o"+i);
+          //get description for each movie
+          $.getJSON('https://omdbapi.com/?apikey=94e5b3c8&i='+id,function(jsmoviedata){
+            $("#te"+i).html("Title: "+jsmoviedata.Title+"<br />" +"Year: "+jsmoviedata.year+"<br />" +"Rated: "+jsmoviedata.Rated+"<br />" +"Released: "+jsmoviedata.Released+"<br />" +"Runtime: "+ jsmoviedata.Runtime+"<br />" +"Genre: "+jsmoviedata.Genre);
+          });
+
 
           //title
           $("<div>",{id:"i"+i,"class":"title"}).appendTo("#"+i);
@@ -110,6 +115,7 @@ function magnify(){
     });
   }
 }
+
 //addlist function: when click on nominate
 
 function addlist(movieid,i){
