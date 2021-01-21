@@ -66,7 +66,7 @@ function magnify(){
           $("<div>",{id:"te"+i,"class":"text"}).appendTo("#o"+i);
           //get description for each movie
           $.getJSON('https://omdbapi.com/?apikey=94e5b3c8&i='+id,function(jsmoviedata){
-            $("#te"+i).html("Title: "+jsmoviedata.Title+"<br />" +"Year: "+jsmoviedata.year+"<br />" +"Rated: "+jsmoviedata.Rated+"<br />" +"Released: "+jsmoviedata.Released+"<br />" +"Runtime: "+ jsmoviedata.Runtime+"<br />" +"Genre: "+jsmoviedata.Genre);
+            $("#te"+i).html("Title: "+jsmoviedata.Title+"<br />" +"Year: "+jsmoviedata.Year+"<br />" +"Rated: "+jsmoviedata.Rated+"<br />" +"Released: "+jsmoviedata.Released+"<br />" +"Runtime: "+ jsmoviedata.Runtime+"<br />" +"Genre: "+jsmoviedata.Genre);
           });
 
 
