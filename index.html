@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body onload="galleryload()">
 
 <div class="Bar">
   <button class="btn" id="home" onclick="gogallery()"><i class="fa fa-home"></i> Home </button>
@@ -24,16 +24,9 @@
 </div>
 <div class = "GalleryandRate" id = "GalleryandRate">
   <!--default will be most rated movies-->
-  <div id="gallery" onload="mygallery()">
-    <div class="movie">
-      <img src="https://m.media-amazon.com/images/M/MV5BZTJjYTcwZjEtMzdmOS00OTVjLWEwM2UtYzEyN2I3N2VkYmY1XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg" alt="poster" style="width:250px;height:350px;">
-      <div class="overlay">
-        <div class="text">Title: Nomadland<br />Year: 2020<br />Rated: R<br />Released: 19 Feb 2021<br />Runtime: 108 min<br />Genre: Drama
-        </div>
-      </div>
-      <div class="title">Nomadland <br /> year: 2020</div>
-      <button  id="nominate00"class="nominate" onclick="galleryclick('tt9770150',0)" ><i class="fa fa-plus-circle"></i> Nominate </button>
-    </div>
+  <div id="gallery" >
+    
+
 
 
     <!--default: will add some pics and descriptions of newly added movies and a nominate button
