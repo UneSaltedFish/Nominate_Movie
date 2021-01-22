@@ -5,11 +5,48 @@ var inputT;
 var idlist=[];
 let moviedata=''//default
 let poster = 'https://cdn.pixabay.com/photo/2016/12/14/23/08/page-not-found-1907792_1280.jpg';//default as not found
-//topten movie's id in gallery,can be changed
+//topten movie's id in gallery,can be changed using movie id ex: tt11874226','tt9231040'
 var topten = ['tt9770150'];
 
 
 
+function galleryload(){
+  console.log("loading gallery");
+  $.each(topten,function(i,object){
+      $.getJSON('https://omdbapi.com/?apikey=94e5b3c8&i='+ topten[i],function(jmoviedata){
+        console.log(jmoviedata);
+        console.log(i+topten[i]+jmoviedata);
+        //append movie class to gallery
+        $("<div>",{id:"g"+i,"class":"movie"}).appendTo("#gallery");
+        //source of poster
+        var sss=jmoviedata.Poster;
+        //if no poster, put on a 404 image as a poster
+        if (jmoviedata.Poster =="N/A"){
+          sss="https://cdn.pixabay.com/photo/2016/12/14/23/08/page-not-found-1907792_1280.jpg";
+        }
+        //append image in to the movie
+        $("<img>",{src:sss,width:"250", height:"350"}).appendTo("#g"+i);
+        //overlay affect on image to show detail
+        $("<div>",{id:"go"+i,"class":"overlay"}).appendTo("#g"+i);
+        $("<div>",{id:"gte"+i,"class":"text"}).appendTo("#go"+i);
+        //get description for each movie
+        $("#gte"+i).html("Title: "+jmoviedata.Title+"<br />" +"Year: "+jmoviedata.Year+"<br />" +"Rated: "+jmoviedata.Rated+"<br />" +"Released: "+jmoviedata.Released+"<br />" +"Runtime: "+ jmoviedata.Runtime+"<br />" +"Genre: "+jmoviedata.Genre);
+        //title
+        $("<div>",{id:"gi"+i,"class":"title"}).appendTo("#g"+i);
+        $("#gi"+i).html(jmoviedata.Title + '<br>'+ "year: "+jmoviedata.Year);
+        //nominate button
+        $("<button>",{id:"nominate0"+i,"class":"nominate"}).appendTo("#g"+i);
+        $('#nominate0'+i).html(" Nominate");
+        $('#nominate0'+i).prepend('<i class="fa fa-plus-circle"></i>');
+        $('#nominate0'+i).click(function(){
+          galleryclick(topten[i],i);
+        });
+
+      });
+    });
+
+
+}
 
 function magnify(){
   inputT= document.getElementById("input").value;
@@ -42,7 +79,7 @@ function magnify(){
         alert("movie not found");
       }
       else{
-
+        idlist =[];
         //an array of which movie in gallery has been nominated in movielist
         var isnominated =[];
         //refresh everytime after search
@@ -70,7 +107,6 @@ function magnify(){
           $.getJSON('https://omdbapi.com/?apikey=94e5b3c8&i='+id,function(jsmoviedata){
             $("#te"+i).html("Title: "+jsmoviedata.Title+"<br />" +"Year: "+jsmoviedata.Year+"<br />" +"Rated: "+jsmoviedata.Rated+"<br />" +"Released: "+jsmoviedata.Released+"<br />" +"Runtime: "+ jsmoviedata.Runtime+"<br />" +"Genre: "+jsmoviedata.Genre);
           });
-
 
           //title
           $("<div>",{id:"i"+i,"class":"title"}).appendTo("#"+i);
@@ -108,13 +144,13 @@ function magnify(){
         //when check current page has/not has movie in the list
         //if has, disable the nominate button
         $.each(isnominated, function( index, value ) {
-            console.log(isnominated);
-            console.log(idlist);
+            console.log("is nominated: "+ isnominated);
+            console.log("current search list: "+idlist);
             document.getElementById("nominate"+isnominated[0]).disabled = true;
             isnominated.shift();
             console.log("poped");
-            console.log(isnominated);
-            console.log(idlist);
+            console.log("is nominated: "+isnominated);
+            console.log("current search list: "+ idlist);
         });
       }
     });
@@ -171,6 +207,9 @@ function deletefromlist(movieid,i){
   if (idlist.indexOf(movieid) !==-1 && topten.indexOf(movieid) !==-1){
     document.getElementById("nominate0"+i).disabled = false;
     document.getElementById("nominate"+i).disabled = false;
+  }
+  else if(topten.indexOf(movieid) !==-1){
+    document.getElementById("nominate0"+i).disabled = false;
   }
   else{document.getElementById("nominate"+i).disabled = false;}
 
