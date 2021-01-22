@@ -14,8 +14,7 @@ function galleryload(){
   console.log("loading gallery");
   $.each(topten,function(i,object){
       $.getJSON('https://omdbapi.com/?apikey=94e5b3c8&i='+ topten[i],function(jmoviedata){
-        console.log(jmoviedata);
-        console.log(i+topten[i]+jmoviedata);
+     
         //append movie class to gallery
         $("<div>",{id:"g"+i,"class":"movie"}).appendTo("#gallery");
         //source of poster
@@ -64,17 +63,9 @@ function magnify(){
     $("#rate").show();
 
     //change to searched movie
-            /*$("#rate").html("Result of \""+inputT+"\"");*/
-
-                    console.log(movieloads);
-                    console.log(moviedata);
-                    /*
-                    console.log(poster);
-                    */
 
     //movieloads data to list top 10 movice name include input text
     $.getJSON(movieloads,function(jmovieloads){
-      console.log(jmovieloads);
       if(jmovieloads.Response=="False"){
         alert("movie not found");
       }
@@ -118,7 +109,6 @@ function magnify(){
           //if movie is in the movie list
           if(movielist.indexOf(id) !== -1){
 
-            console.log("checking any movie has been nominate");
             //find id in current search array "idlist" get the index
             var which= idlist.indexOf(id);
             isnominated.push(which);
@@ -144,13 +134,10 @@ function magnify(){
         //when check current page has/not has movie in the list
         //if has, disable the nominate button
         $.each(isnominated, function( index, value ) {
-            console.log("is nominated: "+ isnominated);
-            console.log("current search list: "+idlist);
+
             document.getElementById("nominate"+isnominated[0]).disabled = true;
             isnominated.shift();
-            console.log("poped");
-            console.log("is nominated: "+isnominated);
-            console.log("current search list: "+ idlist);
+
         });
       }
     });
@@ -177,8 +164,7 @@ function addlist(movieid,i){
 
       movielist.push(movieid);
       listnum++;
-      console.log(listnum);
-      console.log(movielist);
+
     }
     //if movie is added, don't add
     else{
@@ -221,8 +207,6 @@ function deletefromlist(movieid,i){
   }
   listnum--;
 
-  console.log(listnum);
-  console.log(movielist);
 
 }
 
@@ -253,11 +237,11 @@ function galleryclick(imdb,i){
 function boxswitch(){
 
   if($('.listbox').css('display') == 'none'){
-    console.log('none');
+    console.log('hide list');
     $(".listbox").css("display", "block");
   }
   else{
-    console.log('show');
+    console.log('show list');
     $(".listbox").css("display", "none");
   }
 }
