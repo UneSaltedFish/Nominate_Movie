@@ -23,6 +23,8 @@ Hosting at: https://unesaltedfish.github.io/Nominate_Movie/
 
 √Click on upper left corner home button to go back to Gallery
 
+√top rated movie will be shown at home page
+
 
 
 
